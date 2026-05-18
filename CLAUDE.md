@@ -42,15 +42,10 @@ Skapa ett Gmail App Password under:
 
 ## Kom igång
 
+Miljövariablerna sätts som secrets i din miljö (t.ex. GitHub Secrets eller Claude Code Secrets) – ingen `.env`-fil behövs.
+
 ```bash
-# 1. Installera beroenden
-pip install python-dotenv
-
-# 2. Skapa .env från mall
-cp .env.example .env
-# Fyll i dina uppgifter i .env
-
-# 3. Kör skriptet
+# Kör skriptet (env-variabler måste vara satta i miljön)
 python mailer.py
 ```
 

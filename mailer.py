@@ -8,10 +8,6 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.utils import formataddr
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 GMAIL_USER = os.environ["GMAIL_USER"]
 GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
 SENDER_NAME = os.environ["SENDER_NAME"]
