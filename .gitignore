@@ -3,3 +3,5 @@ log.csv
 __pycache__/
 *.pyc
 .DS_Store
+photo1.jpg
+photo2.jpg

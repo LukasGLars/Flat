@@ -5,6 +5,7 @@ import time
 from datetime import date
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
 from email.header import Header
 from email.utils import formataddr
 
@@ -14,9 +15,11 @@ SENDER_NAME = os.environ["SENDER_NAME"]
 SENDER_PHONE = os.environ["SENDER_PHONE"]
 
 CONTACTS_FILE = "contacts.csv"
-TEMPLATE_FILE = "template.txt"
+TEMPLATE_FILE = "template.html"
 LOG_FILE = "log.csv"
 DELAY_SECONDS = 5
+
+IMAGE_FILES = ["photo1.jpg", "photo2.jpg"]
 
 
 def load_template():
@@ -27,7 +30,7 @@ def load_template():
         subject = subject_line[len("Ämne: "):]
     else:
         subject = subject_line
-    body = "\n".join(lines[2:])  # skip subject line and blank separator
+    body = "\n".join(lines[1:])
     return subject, body
 
 
@@ -40,16 +43,34 @@ def personalize(text, namn, ort, telefon):
     )
 
 
-def send_email(to_email, subject, body):
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = str(Header(subject, "utf-8"))
-    msg["From"] = formataddr((SENDER_NAME, GMAIL_USER))
-    msg["To"] = to_email
-    msg.attach(MIMEText(body, "plain", "utf-8"))
+def load_images():
+    images = []
+    for filename in IMAGE_FILES:
+        if os.path.exists(filename):
+            with open(filename, "rb") as f:
+                data = f.read()
+            cid = os.path.splitext(filename)[0]
+            images.append((cid, data))
+    return images
+
+
+def send_email(to_email, subject, html_body, images):
+    msg_root = MIMEMultipart("related")
+    msg_root["Subject"] = str(Header(subject, "utf-8"))
+    msg_root["From"] = formataddr((SENDER_NAME, GMAIL_USER))
+    msg_root["To"] = to_email
+
+    msg_root.attach(MIMEText(html_body, "html", "utf-8"))
+
+    for cid, data in images:
+        img = MIMEImage(data)
+        img.add_header("Content-ID", f"<{cid}>")
+        img.add_header("Content-Disposition", "inline", filename=f"{cid}.jpg")
+        msg_root.attach(img)
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
-        server.sendmail(GMAIL_USER, to_email, msg.as_bytes())
+        server.sendmail(GMAIL_USER, to_email, msg_root.as_bytes())
 
 
 def append_log(datum, namn, email, status):
@@ -72,6 +93,12 @@ def update_sent_date(rows, index, today):
 
 def main():
     subject_template, body_template = load_template()
+    images = load_images()
+
+    if images:
+        print(f"Bilder laddade: {[cid for cid, _ in images]}")
+    else:
+        print("Varning: inga bilder hittades (photo1.jpg, photo2.jpg)")
 
     with open(CONTACTS_FILE, newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
@@ -95,7 +122,7 @@ def main():
         body = personalize(body_template, namn, ort, telefon)
 
         try:
-            send_email(email, subject, body)
+            send_email(email, subject, body, images)
             update_sent_date(rows, row_index, today)
             append_log(today, namn, email, "OK")
             print(f"[OK]  {namn} <{email}>")
