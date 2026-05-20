@@ -1,11 +1,11 @@
-namn,email,telefon,ort,skickat_datum,notering
-Ante Fastigheter,info@antefastigheter.se,0322-408 00,Alingsås,2026-05-18,
-Arkblad Fastigheter,kontakt@arkbladfastigheter.se,0706-84 22 09,Alingsås,2026-05-18,
-Balder,info@balder.se,0774-49 49 49,Alingsås,2026-05-18,
-Ekströms Fastigheter,info@ekstromfastigheter.se,0322-63 63 10,Alingsås,2026-05-18,
-JoBe Bostäder,info@jobebostader.se,0322-155 84,Alingsås,,nuvarande hyresvärd
-NeoBo,annika.andersson@neobo.se,,Alingsås,2026-05-18,Svar: inga lediga nu men händer emellanåt – hoppas något passande dyker upp
-Plusbo Fastigheter,info@plusbo.se,0322-66 55 42,Alingsås,2026-05-18,Svar: sålt alla hyresrätter – ingenting att erbjuda
-TB Fastigheter,info@tb.se,0322-650 700,Alingsås,2026-05-18,
-Västsvenska Hem,info@vastsvenskahem.se,0705-25 54 57,Alingsås,2026-05-18,Svar: inga lediga nu – sparar ansökan i max 1 år och återkommer vid vakans
-Lisa Hlakotsa,,,Alingsås,2026-05-18,Privat – erbjöd boende i Sollebrunn (tackat nej – fel håll)
+namn,email,telefon,ort,skickat_datum,notering,svar_datum
+Ante Fastigheter,info@antefastigheter.se,0322-408 00,Alingsås,2026-05-18,,
+Arkblad Fastigheter,kontakt@arkbladfastigheter.se,0706-84 22 09,Alingsås,2026-05-18,,
+Balder,info@balder.se,0774-49 49 49,Alingsås,2026-05-18,Svar: hänvisar till hemsida och HomeQ – mail/telefon påverkar ej ansökan,2026-05-19
+Ekströms Fastigheter,info@ekstromfastigheter.se,0322-63 63 10,Alingsås,2026-05-18,,
+JoBe Bostäder,info@jobebostader.se,0322-155 84,Alingsås,,nuvarande hyresvärd,
+NeoBo,annika.andersson@neobo.se,,Alingsås,2026-05-18,Svar: inga lediga nu men händer emellanåt – hoppas något passande dyker upp,
+Plusbo Fastigheter,info@plusbo.se,0322-66 55 42,Alingsås,2026-05-18,Svar: sålt alla hyresrätter – ingenting att erbjuda,
+TB Fastigheter,info@tb.se,0322-650 700,Alingsås,2026-05-18,,
+Västsvenska Hem,info@vastsvenskahem.se,0705-25 54 57,Alingsås,2026-05-18,Svar: inga lediga nu – sparar ansökan i max 1 år och återkommer vid vakans,
+Lisa Hlakotsa,,,Alingsås,2026-05-18,Privat – erbjöd boende i Sollebrunn (tackat nej – fel håll),
